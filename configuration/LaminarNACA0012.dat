@@ -1,0 +1,47 @@
+// Laminar flow over the NACA0012 airfoil
+// The mesh file 'naca_ref2.gmsh' is from the First International Workshop on
+// High-Order CFD Methods (https://www1.grc.nasa.gov/research-and-engineering/hiocfd/).
+
+ResourceDir = &(PWD)resource/
+ReturnDir = &(PWD)results/naca0012/
+
+Order = 1
+FluxOrder = &(Order), &(Order)
+
+Grid = Gmsh, &(PWD)grids/naca_ref2.gmsh
+
+Restart = Off, nothing.SAVE
+Stop = Iter, 100000
+PostOrder = [&(Order)+1], 0
+Post = Iter, 0, -1, 100
+Save = Iter, 0, -1, 100
+MaxIter = 10000000
+
+Limiter = None
+ArtificialViscosity = None
+Pressurefix = Off
+
+Gamma = 1.4
+Ma = 0.2
+Re = 600
+Pr = 0.72
+AOA = 0.0
+
+Equation = NS2D, LLF
+Problem = FreeStream
+ProblemInput = &(Ma), &(AOA)
+Timescheme = Steady
+GMRES = 100, 1.0e-8, 1000
+Timestep = CFL, 10
+IncreaseCFL = 1000, 100.0
+SteadyConvergenceTol = 1.0E-10
+TimeResolution = 11
+
+Bdry(1) = AdiabaticWall, Airfoil
+Bdry(2) = Riemann, Inflow
+Bdry(3) = Riemann, Outflow
+
+Matching = 70
+XPeriodic = 71, 72, 0.0
+YPeriodic = 81, 82, 0.0
+ZPeriodic = 91, 92, 0.0

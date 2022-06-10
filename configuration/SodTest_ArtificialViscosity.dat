@@ -1,0 +1,46 @@
+// Modified Sod's test by artificial viscosity
+
+ResourceDir = &(PWD)resource/
+ReturnDir = &(PWD)results/sodtest_AV/
+
+Order = 2
+FluxOrder = [&(Order)+1], [&(Order)+1]
+
+Grid = Gmsh2DQuad, &(PWD)grids/testmesh.msh
+GenGmshXOptions = 0.0, 1.0, 100, 1, 2
+GenGmshYOptions = 0.0, 0.1, 10, 81, 82
+
+Restart = Off, nothing.SAVE
+Stop = Time, 0.2
+PostOrder = [&(Order)+1], 0
+Post = Time, 0, -1, [&(Stop.1)*0.1]
+Save = Time, 0, -1, [&(Stop.1)*0.5]
+MaxIter = 10000000
+
+Equation = NS2D, LLF
+Problem = ShockTube
+ProblemInput = 0.3, 1.0, 0.75, 2.78125, 0.125, 0.0, 0.25
+Timescheme = TVDRK
+Timestep = CFL, 0.9
+TimeResolution = 11
+
+Limiter = None
+PecletNumber = 2.0
+Kappa = 4.0
+ArtificialViscosity = LaplacianP0, &(PecletNumber), &(Kappa)
+Pressurefix = On
+
+Gamma = 1.4
+Re = -100 // negative value
+Ma = 0.2 // dummay
+Pr = 0.7 // dummay
+
+Bdry(1) = Constant, SodLeft
+BdryInput(1) = 1.0, 0.75, 0.0, 2.78125
+Bdry(2) = Constant, SodRight
+BdryInput(2) = 0.125, 0.0, 0.0, 0.25
+
+Matching = 70
+XPeriodic = 71, 72, 0.0
+YPeriodic = 81, 82, [&(GenGmshYOptions.1)-&(GenGmshYOptions.0)]
+ZPeriodic = 91, 92, 0.0

@@ -1,0 +1,56 @@
+// Hypersonic blunt body problem
+// Please be sure that IDEAResourceDir below is properly defined.
+
+ResourceDir = &(PWD)resource/
+ReturnDir = &(PWD)results/bluntbody/
+IDEAResourceDir = 
+
+Order = 0
+FluxOrder = [&(Order)+1], [&(Order)+1]
+
+Grid = Gmsh, &(PWD)grids/bluntbody.msh
+
+Restart = Off, nothing.SAVE
+Stop = Time, 10
+PostOrder = [&(Order)+1], 0
+Post = Iter, 0, -1, 10000
+Save = Time, 0, -1, 0.1
+MaxIter = 10000000
+
+L_ref = 0.0381   // 1.5 inch radius
+rho_ref = 5.4559E-3
+T_ref = 52.183
+a_ref = 150.57
+V_ref = 2460.2
+mu_ref = 4.8284E-6
+k_ref = 4.4772E-3
+
+Ma = 16.34
+AOA = 0
+Pinf = 82.944
+Tinf = &(T_ref)
+Twall = 294.4
+Pback = &(Pinf)
+
+Equation = EquilibriumNS2D, LLF
+Problem = FreeStream
+ProblemInput = &(Ma), &(AOA), &(Pinf), &(Tinf)
+Timescheme = TVDRK
+Timestep = CFL, 0.9
+TimeResolution = 11
+
+Limiter = None
+ArtificialViscosity = None
+Pressurefix = Off
+
+Bdry(3) = SupersonicInflow, inflow
+BdryInput(3) = &(Ma), &(AOA), &(Pinf), &(Tinf)
+Bdry(4) = BackPressure, outflow
+BdryInput(4) = &(Pback)
+Bdry(6) = IsothermalWall, bluntbody
+BdryInput(6) = &(Twall)
+
+Matching = 70
+XPeriodic = 71, 72, 0.0
+YPeriodic = 81, 82, 0.0
+ZPeriodic = 91, 92, 0.0

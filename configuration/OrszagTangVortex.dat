@@ -1,0 +1,35 @@
+// Orszag Tang vortex problem by hMLP_BD limiter
+
+ResourceDir = &(PWD)resource/
+ReturnDir = &(PWD)results/OrszagTangVortex/
+
+Order = 2
+FluxOrder = &(Order), &(Order)
+
+Grid = Gmsh2DQuad, &(PWD)grids/testmesh.msh
+GenGmshXOptions = 0.0, 1.0, 500, 71, 72
+GenGmshYOptions = 0.0, 1.0, 500, 81, 82
+
+Restart = Off, nothing.SAVE
+Stop = Time, 1.0
+PostOrder = [&(Order)+1], 0
+Post = Time, 0, -1, [&(Stop.1)/20]
+Save = Time, 0, -1, [&(Stop.1)/5]
+MaxIter = 10000000
+
+Limiter = hMLP_BD
+ArtificialViscosity = None
+Pressurefix = Off
+
+Gamma = [5.0/3.0]
+
+Equation = GLMMHD2D, LLF
+Problem = OrszagTangVortex
+Timescheme = TVDRK
+Timestep = CFL, 0.9
+TimeResolution = 11
+
+Matching = 70
+XPeriodic = 71, 72, [&(GenGmshXOptions.1)-&(GenGmshXOptions.0)]
+YPeriodic = 81, 82, [&(GenGmshYOptions.1)-&(GenGmshYOptions.0)]
+ZPeriodic = 91, 92, 0.0

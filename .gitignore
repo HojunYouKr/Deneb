@@ -1,0 +1,25 @@
+# Visual studio project
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# Compiled Object files
+x64/*
+
+# Result files
+results/*
+
+# Grid files
+grids/*
+!grids/naca_ref2.gmsh
+!grids/bluntbody.msh
+
+# Configuration files
+configuration/*
+!configuration/LaminarNACA0012.dat
+!configuration/OrszagTangVortex.dat
+!configuration/ShockVortex.dat
+!configuration/SodTest_ArtificialViscosity.dat
+!configuration/SodTest_Limiter.dat
+!configuration/TaylorGreenVortex.dat
+!configuration/BluntBody.dat

@@ -1,0 +1,41 @@
+// Taylor Green vortex problem
+
+ResourceDir = &(PWD)resource/
+ReturnDir = &(PWD)results/TaylorGreenVortex/
+
+Order = 5
+FluxOrder = &(Order), &(Order)
+
+Grid = Gmsh3DHexa, &(PWD)grids/testmesh.msh
+Pi = 3.1415926535898
+GenGmshXOptions = 0.0, [2.0*&(Pi)], 10, 71, 72
+GenGmshYOptions = 0.0, [2.0*&(Pi)], 10, 81, 82
+GenGmshZOptions = 0.0, [2.0*&(Pi)], 10, 91, 92
+
+Restart = Off, nothing.SAVE
+Stop = Time, 100
+PostOrder = [&(Order)+1], 0
+Post = Time, 0, -1, 1
+Save = Time, 0, -1, 1
+MaxIter = 10000000
+
+Limiter = None
+ArtificialViscosity = None
+Pressurefix = Off
+
+Gamma = 1.4
+Ma = 0.1
+Re = 1600
+Pr = 0.72
+
+Equation = NS3D, LLF
+Problem = TaylorGreenVortex
+Timescheme = RODAS3
+GMRES = 100, 1.0e-6, 1000
+Timestep = CFL, 10
+TimeResolution = 11
+
+Matching = 70
+XPeriodic = 71, 72, [&(GenGmshXOptions.1)-&(GenGmshXOptions.0)]
+YPeriodic = 81, 82, [&(GenGmshYOptions.1)-&(GenGmshYOptions.0)]
+ZPeriodic = 91, 92, [&(GenGmshZOptions.1)-&(GenGmshZOptions.0)]
