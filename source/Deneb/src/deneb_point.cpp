@@ -60,7 +60,7 @@ bool Point::GetPoint(const Type type, const Option opt, const int opt_value,
       dimension = 2;
       support_deg = {0, 1,  2,  3,  4,  5,  6,  7,  8,
                      9, 10, 11, 12, 13, 14, 15, 16, 17};
-      support_npt = {1,  2,  6,  10, 15,  21,  28,  36,  45,
+      support_npt = {1,  3,  6,  10, 15,  21,  28,  36,  45,
                      55, 66, 78, 91, 105, 120, 136, 153, 171};
       filepath = [](const int deg, const int npt) -> const std::string {
         return "Points/tris/AlphaOptimized_n" + std::to_string(npt) + ".dat";
