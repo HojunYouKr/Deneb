@@ -137,7 +137,7 @@ void DRMVolumePris::GetDRMPoints(const int num_points,
         std::to_string(num_points) + "\n");
 
   const size_t npt_line = line_weights.size();
-  const size_t npt_tris = tris_weights.size();
+  const size_t npt_tris = (tris_points.size()) / 2;
   points.clear();
   points.reserve(npt_line * npt_tris * 3);
   for (size_t i = 0; i < npt_line; i++) {
