@@ -153,19 +153,25 @@ void BasisSurface::SetTransform(const std::vector<double>& coords) {
     std::vector<double> stdev(dimension_);
     for (int idim = 0; idim < dimension_; idim++)
       stdev[idim] = avocado::VecStdDev(num_nodes, &coords[idim], dimension_);
-    const int dim = static_cast<int>(
-        std::min_element(stdev.begin(), stdev.end()) - stdev.begin());
-    std::vector<double> A, b;
-    A.reserve(num_nodes * dimension_);
-    b.reserve(num_nodes);
-    for (int inode = 0; inode < num_nodes; inode++) {
-      for (int idim = 0; idim < dimension_; idim++)
-        if (idim != dim) A.push_back(coords[inode * dimension_ + idim]);
-      A.push_back(1.0);
-      b.push_back(coords[inode * dimension_ + dim]);
-    }
+    int dim = static_cast<int>(std::min_element(stdev.begin(), stdev.end()) -
+                               stdev.begin());
     int num_ranks;
-    avocado::MatPseudoInv(&A[0], num_nodes, dimension_, num_ranks);
+    std::vector<double> A, b;
+    do {
+      A.clear();
+      b.clear();
+      A.reserve(num_nodes * dimension_);
+      b.reserve(num_nodes);
+      for (int inode = 0; inode < num_nodes; inode++) {
+        for (int idim = 0; idim < dimension_; idim++)
+          if (idim != dim) A.push_back(coords[inode * dimension_ + idim]);
+        A.push_back(1.0);
+        b.push_back(coords[inode * dimension_ + dim]);
+      }
+      avocado::MatPseudoInv(&A[0], num_nodes, dimension_, num_ranks);
+      if (num_ranks != dimension_) dim = (dim + 1) % dimension_;
+    } while (num_ranks != dimension_);
+
     std::vector<double> plane(dimension_);
     gemvAx(1.0, &A[0], num_nodes, &b[0], 1, 0.0, &plane[0], 1, dimension_,
            num_nodes);
