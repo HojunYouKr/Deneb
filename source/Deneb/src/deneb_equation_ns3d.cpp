@@ -964,7 +964,7 @@ void EquationNS3D::ComputeSystemMatrix(const double* solution, Mat& sysmat,
     ComputeNumFluxJacobi(
         num_points, flux_owner_jacobi, flux_neighbor_jacobi,
         flux_owner_grad_jacobi, flux_neighbor_grad_jacobi, owner_cell,
-        neighbor_cell, owner_solution, owner_solution_grad, neighbor_solution,
+        neighbor_cell + num_cells, owner_solution, owner_solution_grad, neighbor_solution,
         neighbor_solution_grad, face_normals[iface]);
 
     avocado::Kernel1::f47(&face_owner_coefficients[iface][0],
