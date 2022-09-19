@@ -250,7 +250,7 @@ void EquationNS2D::BuildData(void) {
     MASTER_MESSAGE(message + "\n");
   }
 }
-void EquationNS2D::GetCellPostSolution(const int num_points,
+void EquationNS2D::GetCellPostSolution(const int icell, const int num_points,
                                        const std::vector<double>& solution,
                                        const std::vector<double>& solution_grad,
                                        std::vector<double>& post_solution) {

@@ -312,7 +312,7 @@ void EquationEquilibriumNS2D::BuildData(void) {
   }
 }
 void EquationEquilibriumNS2D::GetCellPostSolution(
-    const int num_points, const std::vector<double>& solution,
+    const int icell, const int num_points, const std::vector<double>& solution,
     const std::vector<double>& solution_grad,
     std::vector<double>& post_solution) {
   int ind = 0;

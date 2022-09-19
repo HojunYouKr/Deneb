@@ -82,7 +82,7 @@ class EquationNS2D : public Equation, public ConstantsNS2D {
   };
   virtual void ComputeSystemMatrix(const double* solution, Mat& sysmat,
                                    const double t);
-  virtual void GetCellPostSolution(const int num_points,
+  virtual void GetCellPostSolution(const int icell, const int num_points,
                                    const std::vector<double>& solution,
                                    const std::vector<double>& solution_grad,
                                    std::vector<double>& post_solution);

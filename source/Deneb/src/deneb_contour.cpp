@@ -174,7 +174,7 @@ void Contour::CellSolution(const std::string& filename, const double* solution,
                           &sol_grad_[0], dimension_, num_points, num_bases,
                           num_states, 1.0, 0.0);
 
-    DENEB_EQUATION->GetCellPostSolution(num_points, sol_, sol_grad_, sol_post_);
+    DENEB_EQUATION->GetCellPostSolution(icell, num_points, sol_, sol_grad_, sol_post_);
     for (int ipoint = 0; ipoint < num_points; ipoint++)
       for (int ivar = 0; ivar < num_variables; ivar++)
         variables[ivar].push_back(sol_post_[ipoint * num_variables + ivar]);
