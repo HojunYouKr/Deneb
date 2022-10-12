@@ -1,6 +1,17 @@
 #pragma once
 
+#define USE_MKL
+//#define USE_OPENBLAS
+
+#ifdef USE_MKL
 #include <mkl.h>
+#endif
+
+#ifdef USE_OPENBLAS
+#include <cblas.h>
+#include <lapacke.h>
+#endif
+
 #define gemmAB(alpha, A, B, beta, C, nar, nac, nbc)                           \
   cblas_dgemm(CBLAS_LAYOUT::CblasRowMajor, CBLAS_TRANSPOSE::CblasNoTrans,     \
               CBLAS_TRANSPOSE::CblasNoTrans, nar, nbc, nac, alpha, A, nac, B, \
@@ -39,6 +50,10 @@
 #define gemvATx(alpha, A, lda, x, incx, beta, y, incy, nar, nac)             \
   cblas_dgemv(CBLAS_LAYOUT::CblasRowMajor, CBLAS_TRANSPOSE::CblasTrans, nar, \
               nac, alpha, A, lda, x, incx, beta, y, incy)
+
+#ifndef USE_MKL
+void vdSub(const int n, const double* a, const double* b, double* y);
+#endif
 
 namespace avocado {
 void VecCopy(const int num_index, const int* index, const double* vec1,

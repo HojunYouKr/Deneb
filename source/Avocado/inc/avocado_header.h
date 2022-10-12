@@ -2,12 +2,12 @@
 
 #define AVOCADO_MAJOR_VERSION 1
 #define AVOCADO_MINOR_VERSION 0
-#define AVOCADO_BUILD_VERSION 0
+#define AVOCADO_BUILD_VERSION 1
 #define AVOCADO_VERSION                                       \
   "Avocado v" + std::to_string(AVOCADO_MAJOR_VERSION) + "." + \
       std::to_string(AVOCADO_MINOR_VERSION) + "." +           \
       std::to_string(AVOCADO_BUILD_VERSION)
-#define AVOCADO_LAST_UPDATE "June 7 2022"
+#define AVOCADO_LAST_UPDATE "Oct. 12 2022"
 
 #ifdef _WIN32
 #define AVOCADO_USE_WINDOWS

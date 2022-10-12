@@ -6,6 +6,7 @@ Deneb is an open-source high-performance multi-physical flow solver based on hig
 
 * MPI - message passing for parallel computing
 * [Intel Math Kernel Library](https://www.intel.com/content/www/us/en/develop/documentation/get-started-with-mkl-for-dpcpp/top.html) - elementary matrix vector operations
+  * [OpenBLAS](https://www.openblas.net/) can be used as an alternative. Turn on USE_OPENBLAS in avocado_blas.h header file.
 * [ParMETIS](https://github.com/KarypisLab/ParMETIS) - mesh partition for parallel computing
 * [PETSc](https://petsc.org/main/) - Krylov subspace methods with preconditioning for linear system
 * [IDEA](https://github.com/HojunYouKr/IDEA) - high-temperature air properties for hypersonic equilibrium flow simulations

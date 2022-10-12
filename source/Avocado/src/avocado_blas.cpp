@@ -5,6 +5,12 @@
 
 #include "avocado_mpi.h"
 
+#ifndef USE_MKL
+void vdSub(const int n, const double* a, const double* b, double* y) {
+  for (int i = 0; i < n; i++) y[i] = a[i] - b[i];
+}
+#endif
+
 namespace avocado {
 void VecCopy(const int num_index, const int* index, const double* vec1,
              const int stride1, double* vec2, const int stride2) {
