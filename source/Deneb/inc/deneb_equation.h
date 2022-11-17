@@ -25,12 +25,12 @@
       std::vector<double>&flux_owner_grad_jacobi, \
       std::vector<double>&flux_neighbor_grad_jacobi
 #define ASSIGN_FLUX(equation, fluxtype)                        \
-  compute_numflux_ = &##equation## ::ComputeNumFlux##fluxtype; \
-  compute_numflux_jacobi_ = &##equation## ::ComputeNumFluxJacobi##fluxtype
+  compute_numflux_ = &equation::ComputeNumFlux##fluxtype; \
+  compute_numflux_jacobi_ = &equation::ComputeNumFluxJacobi##fluxtype
 #define DEFINE_FLUX(fluxtype)                                        \
-  virtual void ComputeNumFlux##fluxtype##(                           \
+  virtual void ComputeNumFlux##fluxtype(                           \
       const int num_points, std::vector<double>& flux, FACE_INPUTS); \
-  virtual void ComputeNumFluxJacobi##fluxtype##(                     \
+  virtual void ComputeNumFluxJacobi##fluxtype(                     \
       const int num_points, FACE_JACOBI_OUTPUTS, FACE_INPUTS)
 #define BOUNDARY_METHODS                                                    \
   virtual void ComputeBdrySolution(                                         \

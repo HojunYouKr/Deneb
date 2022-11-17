@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <cmath>
 
 template <int dim>
 struct Dual {
