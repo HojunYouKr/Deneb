@@ -1,15 +1,11 @@
 #pragma once
 
-#define USE_MKL
-//#define USE_OPENBLAS
-
-#ifdef USE_MKL
-#include <mkl.h>
-#endif
-
 #ifdef USE_OPENBLAS
 #include <cblas.h>
 #include <lapacke.h>
+#else
+#define USE_MKL
+#include <mkl.h>
 #endif
 
 #define gemmAB(alpha, A, B, beta, C, nar, nac, nbc)                           \

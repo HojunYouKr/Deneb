@@ -8,8 +8,8 @@
 #
 #	METIS_INC		- METIS include (metis.h) directory
 #	PARMETIS_INC	- ParMETIS include (parmetis.h) directory
-#	PETSC_INC1		- PETSc include (petsc.h) directory
-#	PETSC_INC2		- PETSc build-specific include (e.g., petscconf.h) directory
+#	PETSC_INC		- PETSc include (petsc.h) directory
+#	PETSC_CONF_INC	- PETSc build-specific include (e.g., petscconf.h) directory
 #	IDEA_INC		- IDEA include (idea.h) directory
 
 CXX=mpiicpc
@@ -74,7 +74,7 @@ OBJ=$(AVOCADO_OBJ)\
 
 TARGET=Deneb
 LINKFLAGS=-L${PARMETIS_LIB} -L${METIS_LIB} -L${IDEA_LIB} -L${PETSC_LIB} -lparmetis -lmetis -lpthread -lm -ldl -lidea -mkl=sequential -lpetsc
-IFLAGS=-I./$(A_INC_DIR) -I./$(D_INC_DIR) -I${PARMETIS_INC} -I${METIS_INC} -I${PETSC_INC1} -I${PETSC_INC2} -I${IDEA_INC}
+IFLAGS=-I./$(A_INC_DIR) -I./$(D_INC_DIR) -I${PARMETIS_INC} -I${METIS_INC} -I${PETSC_INC} -I${PETSC_CONF_INC} -I${IDEA_INC}
 
 .PHONY : all clean
 
