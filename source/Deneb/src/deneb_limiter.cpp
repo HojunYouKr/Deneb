@@ -683,7 +683,7 @@ void hMLP_BD::ConstructSimplex(void) {
         std::vector<double> jacobian_det(num_points);
         jacobian->CalJacobianDet(num_points, &ref_points[0], &jacobian_det[0]);
         for (int ipoint = 0; ipoint < num_points; ipoint++)
-          quad_weights[ipoint] *= jacobian_det[ipoint];
+          quad_weights[ipoint] *= std::abs(jacobian_det[ipoint]);
         quad_points.resize(num_points * dimension);
         jacobian->TransformToPhyCoords(num_points, &ref_points[0],
                                        &quad_points[0]);

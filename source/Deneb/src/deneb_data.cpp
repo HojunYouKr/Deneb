@@ -264,7 +264,7 @@ void Data::BuildCellData(const int icell) {
     cell_jacobians_[icell]->CalJacobianDet(num_points, &ref_points[0],
                                            &jacobian_det[0]);
     for (int ipoint = 0; ipoint < num_points; ipoint++)
-      quad_weights[ipoint] *= jacobian_det[ipoint];
+      quad_weights[ipoint] *= std::abs(jacobian_det[ipoint]);
     std::vector<double> quad_points(num_points * dimension_);
     cell_jacobians_[icell]->TransformToPhyCoords(num_points, &ref_points[0],
                                                  &quad_points[0]);
@@ -310,7 +310,7 @@ void Data::BuildCellData(const int icell) {
     std::vector<double> jacobian_det(num_points);
     jacobian->CalJacobianDet(num_points, &ref_points[0], &jacobian_det[0]);
     for (int ipoint = 0; ipoint < num_points; ipoint++)
-      quad_weights[ipoint] *= jacobian_det[ipoint];
+      quad_weights[ipoint] *= std::abs(jacobian_det[ipoint]);
     std::vector<double> quad_points(num_points * dimension_);
     jacobian->TransformToPhyCoords(num_points, &ref_points[0], &quad_points[0]);
     flux_basis->ComputeConnectingMatrix(volume_flux_order_, quad_points,
@@ -362,7 +362,7 @@ void Data::BuildCellData(const int icell) {
     cell_jacobians_[icell]->CalJacobianDet(num_points, &ref_points[0],
                                            &jacobian_det[0]);
     for (int ipoint = 0; ipoint < num_points; ipoint++)
-      quad_weights[ipoint] *= jacobian_det[ipoint];
+      quad_weights[ipoint] *= std::abs(jacobian_det[ipoint]);
     quad_points.resize(num_points * dimension_);
     cell_jacobians_[icell]->TransformToPhyCoords(num_points, &ref_points[0],
                                                  &quad_points[0]);
@@ -1192,7 +1192,7 @@ void Data::GetCellQuadrature(const int icell, const int order,
   cell_jacobians_[icell]->CalJacobianDet(num_points, &ref_points[0],
                                          &jacobian_det[0]);
   for (int ipoint = 0; ipoint < num_points; ipoint++)
-    quad_weights[ipoint] *= jacobian_det[ipoint];
+    quad_weights[ipoint] *= std::abs(jacobian_det[ipoint]);
   quad_points.resize(num_points * dimension_);
   cell_jacobians_[icell]->TransformToPhyCoords(num_points, &ref_points[0],
                                                &quad_points[0]);
