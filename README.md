@@ -62,20 +62,23 @@ mpirun -np <# cores> bin/Deneb -c <Configuration file>
 
 ## Contact
 
-* rememory@snu.ac.kr (Hojun You)
+* hojun.you@sejong.ac.kr (Hojun You)
 * kjhunkk@gmail.com  (Juhyun Kim)
 * chongam@snu.ac.kr  (Chongam Kim)
 
 ## Citing Deneb
 Please cite the following article when mentioning Deneb in your own papers.
 
-* Hojun You, Juhyun Kim, and Chongam Kim, Deneb: An Open-source High-performance Multi-physical Flow Solver Based on High-order DRM-DG Method. *Manuscript in preparation*, 2022.
+* Hojun You, Juhyun Kim, and Chongam Kim, Deneb: An Open-source High-performance Multi-physical Flow Solver Based on High-order DRM-DG Method. *Computer Physics Communications*, Vol. 286, 2023, 108672. [Link](https://doi.org/10.1016/j.cpc.2023.108672)
 
 **Bibtex**
 ```bibtex
-@article{You2022deneb,
+@article{You2023deneb,
   title   = {{Deneb: An Open-source High-performance Multi-physical Flow Solver Based on High-order DRM-DG Method}},
   author = {You, Hojun and Kim, Juhyun and Kim, Chongam},
-  journal = {Manuscript in preparation},
-  year = {2022}
+  journal = {Computer Physiccs Communications},
+  volume={286},
+  year = {2023},
+  pages = {108672},
+  doi = {10.1016/j.cpc.2023.108672}
 }
